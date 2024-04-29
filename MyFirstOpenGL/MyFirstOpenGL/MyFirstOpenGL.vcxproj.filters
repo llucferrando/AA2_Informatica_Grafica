@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de origen">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{ed8285fc-4f61-4538-a97f-8ba19c7df6e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Geometry Shader">
+      <UniqueIdentifier>{28ec0107-d947-4bd4-a1c1-f9c0f93d6b3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Fragment Shader">
+      <UniqueIdentifier>{954e4748-72f2-4745-b4b2-2e159e93fae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Vertex Shader">
+      <UniqueIdentifier>{fa572502-6d3b-4e42-9c01-50cc2ddf96aa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Archivos de recursos</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Primitive.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CubeMovementVS.glsl">
+      <Filter>Shaders\Vertex Shader</Filter>
+    </None>
+    <None Include="MyFirstGeometryShader.glsl">
+      <Filter>Shaders\Geometry Shader</Filter>
+    </None>
+    <None Include="YellowTransformFS.glsl">
+      <Filter>Shaders\Fragment Shader</Filter>
+    </None>
+    <None Include="BlueTransformFS.glsl">
+      <Filter>Shaders\Fragment Shader</Filter>
+    </None>
+    <None Include="OrtoedroMovementVS.glsl">
+      <Filter>Shaders\Vertex Shader</Filter>
+    </None>
+    <None Include="DynamicColorsFS.glsl">
+      <Filter>Shaders\Fragment Shader</Filter>
+    </None>
+    <None Include="PyramidMovementVS.glsl">
+      <Filter>Shaders\Vertex Shader</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="InputManager.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitive.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
