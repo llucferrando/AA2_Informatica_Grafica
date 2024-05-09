@@ -1,0 +1,10 @@
+﻿  InputManager.cpp
+  Primitive.cpp
+  Main.cpp
+C:\Users\Usuario\Downloads\AA1_Informatica_Grafica-master\AA1_Informatica_Grafica-master\MyFirstOpenGL\MyFirstOpenGL\Main.cpp(31,90): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Usuario\Downloads\AA1_Informatica_Grafica-master\AA1_Informatica_Grafica-master\MyFirstOpenGL\MyFirstOpenGL\Main.cpp(31,71): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\Usuario\Downloads\AA1_Informatica_Grafica-master\AA1_Informatica_Grafica-master\MyFirstOpenGL\MyFirstOpenGL\Main.cpp(98,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  Utils.cpp
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  MyFirstOpenGL.vcxproj -> C:\Users\Usuario\Downloads\AA1_Informatica_Grafica-master\AA1_Informatica_Grafica-master\MyFirstOpenGL\x64\Debug\MyFirstOpenGL.exe
