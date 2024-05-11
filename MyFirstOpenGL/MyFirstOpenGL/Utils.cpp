@@ -8,6 +8,90 @@ struct ShaderProgram {
 	GLuint fragmentShader = 0;
 };
 
+Troll Utils::LoadOBJModel(const std::string& filePath)
+{
+	std::ifstream file(filePath);
+	if (!file.is_open()) {
+		std::cerr << "No se ha podido abrir el archivo: " << filePath << std::endl;
+		std::exit(EXIT_FAILURE);
+	}
+
+	std::string line;
+	std::stringstream ss;
+	std::string prefix;
+	glm::vec3 tmpVector3;
+	glm::vec2 tmpVector2;
+
+	std::vector<float> vertexs;
+	std::vector<float> vertexNormal;
+	std::vector<float> textureCoordinates;
+
+	std::vector<float> tmpVertexs;
+	std::vector<float> tmpNormals;
+	std::vector<float> tmptextureCoordinates;
+
+	while (std::getline(file, line)) {
+
+		ss.clear();
+		ss.str(line);
+		ss >> prefix;
+
+		if (prefix == "v") {
+			ss >> tmpVector3.x >> tmpVector3.y >> tmpVector3.z;
+			tmpVertexs.push_back(tmpVector3.x);
+			tmpVertexs.push_back(tmpVector3.y);
+			tmpVertexs.push_back(tmpVector3.z);
+		}
+		else if (prefix == "vt") {
+			ss >> tmpVector2.x >> tmpVector2.y;
+			tmptextureCoordinates.push_back(tmpVector2.x);
+			tmptextureCoordinates.push_back(tmpVector2.y);
+		}
+		else if (prefix == "vn") {
+			ss >> tmpVector3.x >> tmpVector3.y >> tmpVector3.z;
+			tmpNormals.push_back(tmpVector3.x);
+			tmpNormals.push_back(tmpVector3.y);
+			tmpNormals.push_back(tmpVector3.z);
+		}
+		else if (prefix == "f") {
+			int vertexData;
+			short counter = 0;
+
+			while (ss >> vertexData) {
+				switch (counter) 
+				{
+					case 0:
+						vertexs.push_back(tmpVertexs[(vertexData - 1) * 3]);
+						vertexs.push_back(tmpVertexs[((vertexData - 1) * 3) + 1]);
+						vertexs.push_back(tmpVertexs[((vertexData - 1) * 3) + 2]);
+						ss.ignore(1, '/');
+						counter++;
+						break;
+
+					case 1:
+						textureCoordinates.push_back(tmptextureCoordinates[(vertexData - 1) * 2]);
+						textureCoordinates.push_back(tmptextureCoordinates[((vertexData - 1) * 2) + 1]);
+						ss.ignore(1, '/');
+						counter++;
+						break;
+
+					case 2:
+						vertexNormal.push_back(tmpNormals[(vertexData - 1) * 3]);
+						vertexNormal.push_back(tmpNormals[((vertexData - 1) * 3) + 1]);
+						vertexNormal.push_back(tmpNormals[((vertexData - 1) * 3) + 2]);
+						counter = 0;
+						break;
+				}
+
+			}
+
+		}
+
+	}
+
+	return Troll(vertexs, textureCoordinates, vertexNormal);
+}
+
 //Funcion que genera una smatriz de traslación
 glm::mat4 Utils::GenerateTranslationMatrix(glm::vec3 translation)
 {

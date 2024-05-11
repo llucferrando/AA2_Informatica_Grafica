@@ -5,16 +5,18 @@
 #include <gtc/matrix_transform.hpp>
 #include <iostream>
 #include <string>
-
+#include "Camera.h"
 #include <vector>
 #include <chrono>
 #include "Primitive.h"
 #include "InputManager.h"
 #include "Utils.h"
+#include "Troll.h"
 
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
 std::vector<GLuint> compiledPrograms;
+std::vector<Troll> trolls;
 
 struct ShaderProgram {
 
@@ -136,7 +138,7 @@ void main() {
 
 	//Inicializamos GLEW y controlamos errores
 	if (glewInit() == GLEW_OK) {
-
+		Camera* myCamera = new Camera;
 		//Declarar instancia del cubo
 		Primitive * cube = new Primitive;
 		//Declarar instancia de la piramide
@@ -148,12 +150,15 @@ void main() {
 		ShaderProgram myCubeProgram, myPyramidProgram, myOrtoedroProgram;
 		myCubeProgram.vertexShader = myUtils.LoadVertexShader("CubeMovementVS.glsl");
 		myCubeProgram.fragmentShader = myUtils.LoadFragmentShader("BlueTransformFS.glsl");
+		myCubeProgram.geometryShader = myUtils.LoadGeometryShader("MyFirstGeometryShader.glsl");
 
 		myPyramidProgram.vertexShader = myUtils.LoadVertexShader("PyramidMovementVS.glsl");
 		myPyramidProgram.fragmentShader = myUtils.LoadFragmentShader("DynamicColorsFS.glsl");
 		
 		myOrtoedroProgram.vertexShader = myUtils.LoadVertexShader("OrtoedroMovementVS.glsl");
 		myOrtoedroProgram.fragmentShader = myUtils.LoadFragmentShader("YellowTransformFS.glsl");
+
+		trolls.push_back(myUtils.LoadOBJModel("Assets/Models/troll.obj"));
 
 
 
@@ -274,7 +279,7 @@ void main() {
 			float elapsedTime = myUtils.GetElapsedTime();
 
 			//Instance the function where we do the inputs
-			myInputManager.InputTransforms(window, cube, ortoedro, pyramid);
+			myInputManager.InputTransforms(window, cube, ortoedro, pyramid, myCamera);
 			//Pulleamos los eventos (botones, teclas, mouse...)
 			glfwPollEvents();
 			if(!myInputManager.isStoped)
@@ -290,6 +295,8 @@ void main() {
 					glBindVertexArray(cubeVao);
 					glUseProgram(compiledPrograms[0]);
 					glm::mat4 cubeModelMatrix = glm::mat4(1.f);
+					glm::mat4 viewMatrix = glm::lookAt(myCamera->position, myCamera->position + glm::vec3(0.f, 0.f, -1.f), myCamera->localVectorUp);
+					glm::mat4 projectionMatrix = glm::perspective(glm::radians(myCamera->fov), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, myCamera->fNear, myCamera->fFar);
 					
 					// Aplico velocidad hacia el forward
 					cube->setPosition(cube->getPosition() + cube->getForward() * cube->getYVelocity() * static_cast<float>(dTime.count()));
@@ -306,6 +313,8 @@ void main() {
 					//Aplicamos la matriz al shader
 					glUniformMatrix4fv(glGetUniformLocation(compiledPrograms[0], "translation"), 1, GL_FALSE, glm::value_ptr(cubeTranslationMatrix));
 					glUniformMatrix4fv(glGetUniformLocation(compiledPrograms[0], "rotation"), 1, GL_FALSE, glm::value_ptr(rotationMatrix));
+					glUniformMatrix4fv(glGetUniformLocation(compiledPrograms[0], "viewMatrix"), 1, GL_FALSE, glm::value_ptr(viewMatrix));
+					glUniformMatrix4fv(glGetUniformLocation(compiledPrograms[0], "projectionMatrix"), 1, GL_FALSE, glm::value_ptr(projectionMatrix));
 					
 					
 					//Asignar valores iniciales al programa
@@ -314,6 +323,9 @@ void main() {
 
 					//Definimos que queremos dibujar
 					glDrawArrays(GL_TRIANGLE_STRIP, 0, 14);
+
+					std::cout << myCamera->position.x << myCamera->position.y;
+
 
 				}
 
@@ -380,7 +392,9 @@ void main() {
 
 					//Definimos que queremos dibujar
 					glDrawArrays(GL_TRIANGLE_STRIP, 0, 14);
-				}
+				}	
+
+				trolls[0].Render();
 				//Cambiamos buffers
 				glFlush();
 				glfwSwapBuffers(window);
@@ -394,11 +408,15 @@ void main() {
 		glDeleteProgram(compiledPrograms[0]);
 		glDeleteProgram(compiledPrograms[1]);
 		glDeleteProgram(compiledPrograms[2]);
+		
+		
 	}
 	else {
 		std::cout << "Crashed" << std::endl;
 		glfwTerminate();
 	}
+
+	
 
 	//Finalizamos GLFW
 	glfwTerminate();

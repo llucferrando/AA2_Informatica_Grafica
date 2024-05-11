@@ -8,6 +8,7 @@
 #include <string>
 #include <fstream>
 #include "Primitive.h"
+#include "Camera.h"
 
 
 class InputManager
@@ -26,7 +27,7 @@ class InputManager
 	int prevKey4State = GLFW_RELEASE;
 	int prevKeySpaceState = GLFW_RELEASE;
 
-	void InputTransforms(GLFWwindow * window, Primitive* cube, Primitive* ortoedro, Primitive* pyramid);
+	void InputTransforms(GLFWwindow * window, Primitive* cube, Primitive* ortoedro, Primitive* pyramid, Camera * myCamera);
 
 	
 };

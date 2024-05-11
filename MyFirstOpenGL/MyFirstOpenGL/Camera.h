@@ -7,7 +7,11 @@ public:
 	Camera();
 	float fov;
 	float aspectRatio;
+	float fNear;
+	float fFar;
 	
 
 };
+
+
 

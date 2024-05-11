@@ -1,6 +1,6 @@
 #include "InputManager.h"
 
-void InputManager::InputTransforms(GLFWwindow * window, Primitive * cube, Primitive * ortoedro, Primitive * pyramid)
+void InputManager::InputTransforms(GLFWwindow * window, Primitive * cube, Primitive * ortoedro, Primitive * pyramid, Camera * myCamera)
 {
 	//Get keys to compare
 	int currentKeyMState = glfwGetKey(window, GLFW_KEY_M);
@@ -13,6 +13,18 @@ void InputManager::InputTransforms(GLFWwindow * window, Primitive * cube, Primit
 
 	//Check if the execution is stopped by user input
 	if(!isStoped){
+		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+			myCamera->position.y += 0.01f;
+		}
+		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+			myCamera->position.y -= 0.01f;
+		}
+		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+			myCamera->position.x -= 0.01f;
+		}
+		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+			myCamera->position.x += 0.01f;
+		}
 		//M INPUTS
 		if (currentKeyMState == GLFW_PRESS && prevKeyMState == GLFW_RELEASE){
 			// Accelerate cube transforms velocity

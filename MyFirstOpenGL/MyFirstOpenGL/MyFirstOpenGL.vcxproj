@@ -19,9 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Troll.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -34,8 +37,11 @@
     <None Include="DynamicColorsFS.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Primitive.h" />
+    <ClInclude Include="Troll.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
