@@ -1,15 +1,15 @@
 #version 440 core
 
+uniform vec2 windowSize;
+uniform sampler2D textureSampler;
+
+in vec2 uvsFragmentShader;
+
 out vec4 fragColor;
 
-uniform vec2 windowSize;
+void main() {
+        
+        vec2 adjustedTexCoord = vec2(uvsFragmentShader.x, 1.0 - uvsFragmentShader.y);
+        fragColor = texture(textureSampler, adjustedTexCoord);  
 
-void main(){
-	
-	if(gl_FragCoord.y > windowSize.y * 0.5){
-		fragColor = vec4(1.0, 0.70, 0.0, 1.0);
-	}
-	else{
-		fragColor = vec4(1.0, 1.0, 0.0, 1.0);
-	}
 }

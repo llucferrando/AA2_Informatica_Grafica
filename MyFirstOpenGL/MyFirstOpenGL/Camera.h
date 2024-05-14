@@ -5,7 +5,7 @@ class Camera : public GameObject
 {
 public:
 	Camera();
-	float fov;
+	float fFov;
 	float aspectRatio;
 	float fNear;
 	float fFar;

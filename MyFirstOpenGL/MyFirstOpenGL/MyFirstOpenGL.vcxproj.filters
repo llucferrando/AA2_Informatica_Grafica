@@ -42,35 +42,21 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Troll.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="CubeMovementVS.glsl">
-      <Filter>Shaders\Vertex Shader</Filter>
-    </None>
-    <None Include="MyFirstGeometryShader.glsl">
-      <Filter>Shaders\Geometry Shader</Filter>
-    </None>
-    <None Include="YellowTransformFS.glsl">
-      <Filter>Shaders\Fragment Shader</Filter>
-    </None>
-    <None Include="BlueTransformFS.glsl">
-      <Filter>Shaders\Fragment Shader</Filter>
-    </None>
-    <None Include="OrtoedroMovementVS.glsl">
-      <Filter>Shaders\Vertex Shader</Filter>
-    </None>
-    <None Include="DynamicColorsFS.glsl">
-      <Filter>Shaders\Fragment Shader</Filter>
-    </None>
-    <None Include="PyramidMovementVS.glsl">
-      <Filter>Shaders\Vertex Shader</Filter>
-    </None>
+    <ClCompile Include="Stb.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Troll.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputManager.h">
@@ -85,11 +71,28 @@
     <ClInclude Include="GameObject.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Troll.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Troll.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MyFirstFragmentShader.glsl">
+      <Filter>Shaders\Fragment Shader</Filter>
+    </None>
+    <None Include="MyFirstGeometryShader.glsl">
+      <Filter>Shaders\Geometry Shader</Filter>
+    </None>
+    <None Include="MyFirstVertexShader.glsl">
+      <Filter>Shaders\Vertex Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>
