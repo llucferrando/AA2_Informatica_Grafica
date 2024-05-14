@@ -1,6 +1,6 @@
 #include "InputManager.h"
 
-void InputManager::InputTransforms(GLFWwindow * window, Primitive * cube, Primitive * ortoedro, Primitive * pyramid, Camera * myCamera)
+void InputManager::InputTransforms(GLFWwindow * window,  Camera * myCamera)
 {
 	//Get keys to compare
 	int currentKeyMState = glfwGetKey(window, GLFW_KEY_M);
@@ -25,30 +25,25 @@ void InputManager::InputTransforms(GLFWwindow * window, Primitive * cube, Primit
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
 			myCamera->position.x += 0.01f;
 		}
-		//M INPUTS
-		if (currentKeyMState == GLFW_PRESS && prevKeyMState == GLFW_RELEASE){
-			// Accelerate cube transforms velocity
-			cube->setYVelocity(cube->getYVelocity() * 1.1f);
-			cube->setFAngularVelocity(cube->getFAngularVelocity() * 1.1f);
-			// Accelerate pyramide transforms velocity
-			pyramid->setYVelocity(pyramid->getYVelocity() * 1.1f);
-			pyramid->setFAngularVelocity(cube->getFAngularVelocity() * 1.1f);
-			// Accelerate ortoedro transforms velocity
-			ortoedro->setYVelocity(ortoedro->getYVelocity() * 1.1f);
-			ortoedro->setFAngularVelocity(ortoedro->getFAngularVelocity() * 1.1f);
+		if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
+			myCamera->position.z += 0.01f;
 		}
-		//N INPUTS
-		if (currentKeyNState == GLFW_PRESS && prevKeyNState == GLFW_RELEASE){
-			// Deaccelerate cube transforms velocity
-			cube->setYVelocity(cube->getYVelocity() * 0.9f);
-			cube->setFAngularVelocity(cube->getFAngularVelocity() * 0.9f);
-			// Deaccelerate pyramid transforms velocity
-			pyramid->setYVelocity(pyramid->getYVelocity() * 0.9f);
-			pyramid->setFAngularVelocity(cube->getFAngularVelocity() * 0.9f);
-			// Deaccelerate pyramid transforms velocity
-			ortoedro->setYVelocity(ortoedro->getYVelocity() * 0.9f);
-			ortoedro->setFAngularVelocity(ortoedro->getFAngularVelocity() * 0.9f);
+		if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) {
+			myCamera->position.z -= 0.01f;
 		}
+		if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS) {
+			myCamera->fFov += 0.1f;
+			if (myCamera->fFov > 180.f) {
+				myCamera->fFov = 180.f;
+			}
+		}
+		if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
+			myCamera->fFov -= 0.1f;
+			if (myCamera->fFov < 1.0f) {
+				myCamera->fFov = 1.0f;
+			}
+		}
+		
 
 		//1 INPUTS
 		if (currentKey1State == GLFW_PRESS && prevKey1State == GLFW_RELEASE && !primitiveFilled){
@@ -60,25 +55,21 @@ void InputManager::InputTransforms(GLFWwindow * window, Primitive * cube, Primit
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
 		//2 INPUTS
-		if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS && prevKey2State == GLFW_RELEASE && cube->isRendering()){
-			cube->setIsRendering(false);
+		if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS && prevKey2State == GLFW_RELEASE){
 		}
-		else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS && prevKey2State == GLFW_RELEASE && !cube->isRendering()){
-			cube->setIsRendering(true);
+		else if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS && prevKey2State == GLFW_RELEASE ){
 		}
 		//3 INPUTS
-		if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS && prevKey3State == GLFW_RELEASE && pyramid->isRendering()){
-			pyramid->setIsRendering(false);
+		if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS && prevKey3State == GLFW_RELEASE){
 		}
-		else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS && prevKey3State == GLFW_RELEASE && !pyramid->isRendering()){
-			pyramid->setIsRendering(true);
+		else if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS && prevKey3State == GLFW_RELEASE ){
 		}
 		//4 INPUTS
-		if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS && prevKey4State == GLFW_RELEASE && ortoedro->isRendering()){
-			ortoedro->setIsRendering(false);
+		if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS && prevKey4State == GLFW_RELEASE ){
+			
 		}
-		else if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS && prevKey4State == GLFW_RELEASE && !ortoedro->isRendering()){
-			ortoedro->setIsRendering(true);
+		else if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS && prevKey4State == GLFW_RELEASE ){
+			
 		}
 	
 	}

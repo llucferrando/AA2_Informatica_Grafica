@@ -4,17 +4,14 @@
 #include <glm.hpp>
 #include <gtc/type_ptr.hpp>
 #include <gtc/matrix_transform.hpp>
-#include "Troll.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <vector>
+#include "Model.h"
+#include "GameObject.h"
+#include "Texture.h"
 
-class Utils
+
+namespace Utils 
 {
-public:
-	Troll LoadOBJModel(const std::string& filePath);
+	Model* LoadOBJModel(GLuint _shaderProgram,  const std::string& filePath, const char* texturefilePath);
 	glm::mat4 GenerateTranslationMatrix(glm::vec3 translation);
 	glm::mat4 GenerateRotationMatrix(glm::vec3 axis, float fDegrees);
 	glm::mat4 GenerateScaleMatrix(glm::vec3 scaleAxis);
@@ -23,9 +20,6 @@ public:
 	GLuint LoadGeometryShader(const std::string& filePath);
 	GLuint LoadVertexShader(const std::string& filePath);
 	float GetElapsedTime();
+}
 
-
-
-
-};
 

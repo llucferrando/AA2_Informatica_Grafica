@@ -27,7 +27,7 @@ class InputManager
 	int prevKey4State = GLFW_RELEASE;
 	int prevKeySpaceState = GLFW_RELEASE;
 
-	void InputTransforms(GLFWwindow * window, Primitive* cube, Primitive* ortoedro, Primitive* pyramid, Camera * myCamera);
+	void InputTransforms(GLFWwindow * window,  Camera * myCamera);
 
 	
 };
