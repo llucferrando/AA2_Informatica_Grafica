@@ -1,14 +1,9 @@
 #include "Texture.h"
 
-Texture::Texture(const char* filePath, const std::vector<float>& uvs) : 
-    _filePath(filePath), _uvs(uvs)
-{
-}
-
-void Texture::InitializeTexture()
+void Texture::InitializeTexture(const char* filePath)
 {
     int width, height, nrChannels;
-	unsigned char* textureInfo = stbi_load(_filePath, &width, &height, &nrChannels, 0);
+    unsigned char* textureInfo = stbi_load(filePath, &width, &height, &nrChannels, 0);
     //Definimos canal de textura activo
     glActiveTexture(GL_TEXTURE0);
 
@@ -33,6 +28,7 @@ void Texture::InitializeTexture()
 
     //Liberar memoria de la imagen cargada
     stbi_image_free(textureInfo);
+
 }
 
 

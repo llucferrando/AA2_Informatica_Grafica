@@ -1,10 +1,13 @@
-﻿  Main.cpp
-E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Main.cpp(35,90): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Main.cpp(35,71): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Main.cpp(99,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
-  Model.cpp
-E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Model.cpp(12,39): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
-  Texture.cpp
-  Utils.cpp
+﻿  Model.cpp
+E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Model.cpp(8,42): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+  ProgramManager.cpp
+  Source.cpp
+E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Source.cpp(4,1): warning C4005: 'WINDOW_WIDTH': macro redefinition
+E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Model.h(11,1): message : see previous definition of 'WINDOW_WIDTH'
+E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Source.cpp(5,1): warning C4005: 'WINDOW_HEIGHT': macro redefinition
+E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Model.h(12,1): message : see previous definition of 'WINDOW_HEIGHT'
+E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Source.cpp(15,120): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Source.cpp(15,101): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Source.cpp(132,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
   Generating Code...
   MyFirstOpenGL.vcxproj -> E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\x64\Debug\MyFirstOpenGL.exe
