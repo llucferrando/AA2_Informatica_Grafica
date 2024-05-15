@@ -13,7 +13,7 @@ uniform mat4 view;
 uniform mat4 projection;
 
 void main(){
-	
+
     mat4 model = translationMatrix * rotationMatrix * scaleMatrix;
 
 	for(int i = 0; i < gl_in.length(); i++){
@@ -21,7 +21,6 @@ void main(){
 		uvsFragmentShader = uvsGeometryShader[i];
 		EmitVertex();
 	}
-	EndPrimitive();
 
-	
+	EndPrimitive();
 }

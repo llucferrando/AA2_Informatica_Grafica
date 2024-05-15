@@ -14,8 +14,8 @@
 #include "InputManager.h"
 #include "Model.h"
 
-#define WINDOW_WIDTH 640
-#define WINDOW_HEIGHT 480
+#define WINDOW_WIDTH 1000
+#define WINDOW_HEIGHT 880
 
 std::vector<GLuint> compiledPrograms;
 std::vector<Model*> models;
@@ -36,7 +36,6 @@ void Resize_Window(GLFWwindow* window, int iFrameBufferWidth, int iFrameBufferHe
 }
 
 
-//Función que dado un struct que contiene los shaders de un programa generara el programa entero de la GPU
 GLuint CreateProgram(const ShaderProgram& shaders) {
 
 	//Crear programa de la GPU
@@ -157,32 +156,33 @@ void main() {
 		//Definimos modo de dibujo para cada cara
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
+		myModel->UseProgram();
+		
+		
+
 		//Generamos el game loop
 		while (!glfwWindowShouldClose(window)) {
 
 			//Pulleamos los eventos (botones, teclas, mouse...)
 			glfwPollEvents();
-			
+
 			//Limpiamos los buffers
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-			//Indicar a la tarjeta GPU que programa debe usar
-			glUseProgram(compiledPrograms[0]);
 
-			
 			for (Model* model : models)
 			{
 				model->Render();
 
 			}
+			
+			
 			myInputManager.InputTransforms(window, myCamera);
 			
 			glFlush();
 			glfwSwapBuffers(window);
 		}
 		
-		//Desactivar y eliminar programa
-		glUseProgram(0);
-		glDeleteProgram(compiledPrograms[0]);
+	
 
 	}
 	else {

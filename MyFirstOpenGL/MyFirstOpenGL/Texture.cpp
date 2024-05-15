@@ -7,10 +7,12 @@ Texture::Texture(const char* filePath, const std::vector<float>& uvs) :
 
 void Texture::InitializeTexture()
 {
+    int width, height, nrChannels;
 	unsigned char* textureInfo = stbi_load(_filePath, &width, &height, &nrChannels, 0);
-
     //Definimos canal de textura activo
     glActiveTexture(GL_TEXTURE0);
+
+    GLuint _textureID;
 
     glGenTextures(1, &_textureID);
 

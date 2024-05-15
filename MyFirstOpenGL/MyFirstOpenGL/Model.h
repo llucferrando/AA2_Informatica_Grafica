@@ -23,7 +23,7 @@ public:
 protected:
 	GLuint VAO, VBO, uvVBO;
 	unsigned int numVertexs;
-	Texture* _texture;
+	Texture * _texture;
 	
 	GLuint _programID;
 

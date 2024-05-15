@@ -1,13 +1,10 @@
-﻿  Model.cpp
-E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Model.cpp(9,39): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
-  Main.cpp
+﻿  Main.cpp
 E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Main.cpp(35,90): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Main.cpp(35,71): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Main.cpp(100,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
+E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Main.cpp(99,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  Model.cpp
+E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\MyFirstOpenGL\Model.cpp(12,39): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
   Texture.cpp
-  Stb.cpp
   Utils.cpp
   Generating Code...
-  LINK : E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\x64\Debug\MyFirstOpenGL.exe not found or not built by the last incremental link; performing full link
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   MyFirstOpenGL.vcxproj -> E:\2n CDI\INFO\AA2_Informatica_Grafica\MyFirstOpenGL\x64\Debug\MyFirstOpenGL.exe

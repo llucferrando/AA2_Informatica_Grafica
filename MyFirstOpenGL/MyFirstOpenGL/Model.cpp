@@ -1,19 +1,20 @@
 #include "Model.h"
-#define WINDOW_WIDTH 640
-#define WINDOW_HEIGHT 480
 #include "Utils.h"
+#define WINDOW_WIDTH 100
+#define WINDOW_HEIGHT 880
 using namespace Utils;
+
 Model::Model(const char* filePath,GLuint shaderProg, const std::vector<float>& vertexs, const std::vector<float>& uvs, const std::vector<float>& normals)
 {
+	_programID = shaderProg;
+	_texture = new Texture(filePath,uvs);
 	//Almaceno la cantidad de vertices que habra
 	this->numVertexs = vertexs.size() / 3;
 	
-	_texture = new Texture(filePath,uvs);
 	//Generamos VAO/VBO
 	glGenVertexArrays(1, &this->VAO);
 	glGenBuffers(1, &this->VBO);
 	glGenBuffers(1, &this->uvVBO);
-	_programID = 0;
 	//Defino el VAO creado como activo
 	glBindVertexArray(this->VAO);
 
@@ -35,21 +36,17 @@ Model::Model(const char* filePath,GLuint shaderProg, const std::vector<float>& v
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
+	_texture->InitializeTexture();
 
 }
 
 void Model::Render()
 {
 	
-	_texture->InitializeTexture();
-
-	UseProgram();
-
 	//Vinculo su VAO para ser usado
 	glBindVertexArray(this->VAO);
 
 	// Dibujamos
-	
 	glDrawArrays(GL_TRIANGLES, 0, this->numVertexs);
 
 	//Desvinculamos VAO
@@ -64,7 +61,7 @@ void Model::UseProgram()
 	glUseProgram(_programID);
 
 	glm::mat4 translationMatrix = GenerateTranslationMatrix(position + glm::vec3(0.f, 0.f, 0.f));
-	glm::mat4 rotationMatrix = GenerateRotationMatrix(glm::vec3(1.f, 1.f, 1.f), 1);
+	glm::mat4 rotationMatrix = GenerateRotationMatrix(glm::vec3(1.f, 1.f, 1.f), rotation.x);
 	glm::mat4 scaleMatrix = GenerateScaleMatrix(scale);
 	glm::mat4 view = glm::lookAt(myCamera->position, myCamera->position + glm::vec3(0.f, 0.f, -1.f), myCamera->localVectorUp);
 	glm::mat4 projection = glm::perspective(myCamera->fFov, (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 100.0f);
