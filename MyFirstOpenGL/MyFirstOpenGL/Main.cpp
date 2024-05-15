@@ -1,105 +1,29 @@
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <glm.hpp>
-#include <gtc/type_ptr.hpp>
-#include <gtc/matrix_transform.hpp>
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <vector>
-#include <sstream>
-#include <stb_image.h>
+
 #include "Utils.h"
 #include "Camera.h"
 #include "InputManager.h"
 #include "Model.h"
+#include "MyShaderProgram.h"
 
 #define WINDOW_WIDTH 1000
 #define WINDOW_HEIGHT 880
 
-std::vector<GLuint> compiledPrograms;
-std::vector<Model*> models;
 
-struct ShaderProgram {
+MyShaderProgram * myProgram;
+std::vector<Model> models;
 
-	GLuint vertexShader = 0;
-	GLuint geometryShader = 0;
-	GLuint fragmentShader = 0;
-};
-
-
+using namespace Utils;
 void Resize_Window(GLFWwindow* window, int iFrameBufferWidth, int iFrameBufferHeight) {
-
 	//Definir nuevo tamaño del viewport
 	glViewport(0, 0, iFrameBufferWidth, iFrameBufferHeight);
-	glUniform2f(glGetUniformLocation(compiledPrograms[0], "windowSize"), iFrameBufferWidth, iFrameBufferHeight);
-}
-
-
-GLuint CreateProgram(const ShaderProgram& shaders) {
-
-	//Crear programa de la GPU
-	GLuint program = glCreateProgram();
-
-	//Verificar que existe un vertex shader y adjuntarlo al programa
-	if (shaders.vertexShader != 0) {
-		glAttachShader(program, shaders.vertexShader);
-	}
-
-	if (shaders.geometryShader != 0) {
-		glAttachShader(program, shaders.geometryShader);
-	}
-
-	if (shaders.fragmentShader != 0) {
-		glAttachShader(program, shaders.fragmentShader);
-	}
-
-	// Linkear el programa
-	glLinkProgram(program);
-
-	//Obtener estado del programa
-	GLint success;
-	glGetProgramiv(program, GL_LINK_STATUS, &success);
-
-	//Devolver programa si todo es correcto o mostrar log en caso de error
-	if (success) {
-
-		//Liberamos recursos
-		if (shaders.vertexShader != 0) {
-			glDetachShader(program, shaders.vertexShader);
-		}
-
-		//Liberamos recursos
-		if (shaders.geometryShader != 0) {
-			glDetachShader(program, shaders.geometryShader);
-		}
-
-		//Liberamos recursos
-		if (shaders.fragmentShader != 0) {
-			glDetachShader(program, shaders.fragmentShader);
-		}
-
-		return program;
-	}
-	else {
-
-		//Obtenemos longitud del log
-		GLint logLength;
-		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &logLength);
-
-		//Almacenamos log
-		std::vector<GLchar> errorLog(logLength);
-		glGetProgramInfoLog(program, logLength, nullptr, errorLog.data());
-
-		std::cerr << "Error al linkar el programa:  " << errorLog.data() << std::endl;
-		std::exit(EXIT_FAILURE);
-	}
+	glUniform2f(glGetUniformLocation(myProgram->compiledPrograms[0], "windowSize"), iFrameBufferWidth, iFrameBufferHeight);
 }
 
 void main() {
-
+	
 	InputManager myInputManager;
 	Camera* myCamera = new Camera;
+	
 	//Definir semillas del rand según el tiempo
 	srand(static_cast<unsigned int>(time(NULL)));
 
@@ -130,35 +54,19 @@ void main() {
 	//Indicamos lado del culling
 	glCullFace(GL_BACK);
 
-	//Indicamos lado del culling
+	//Indicamos lado del cullingS
 	glEnable(GL_DEPTH_TEST);
 
 	//Inicializamos GLEW y controlamos errores
 	if (glewInit() == GLEW_OK) {
 
-		//Compilar shaders
-		ShaderProgram myFirstProgram, mySecondProgram;
-		myFirstProgram.vertexShader = Utils::LoadVertexShader("MyFirstVertexShader.glsl");
-		myFirstProgram.geometryShader = Utils::LoadGeometryShader("MyFirstGeometryShader.glsl");
-		myFirstProgram.fragmentShader = Utils::LoadFragmentShader("MyFirstFragmentShader.glsl");
-
-		compiledPrograms.push_back(CreateProgram(myFirstProgram));
-		Model* myModel = Utils::LoadOBJModel(compiledPrograms[0], "Assets/Models/troll.obj", "Assets/Texturas/troll.png");
-		myModel->myCamera = myCamera;
-		myModel->position = { 1.f,1.f,1.f };
-		myModel->rotation = { 1.f,1.f,1.f };
-		myModel->scale = { 1.f,1.f,1.f };
-		models.push_back(myModel);
+		models.push_back(myProgram->LoadOBJModel(myProgram,0,"Assets/Models/troll.obj", "Assets/Texturas/troll.png"));
 
 		//Definimos color para limpiar el buffer de color
 		glClearColor(1.f, 1.f, 1.f, 1.f);
 
 		//Definimos modo de dibujo para cada cara
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-		myModel->UseProgram();
-		
-		
 
 		//Generamos el game loop
 		while (!glfwWindowShouldClose(window)) {
@@ -169,9 +77,9 @@ void main() {
 			//Limpiamos los buffers
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-			for (Model* model : models)
+			for (Model model : models)
 			{
-				model->Render();
+				model.Render();
 
 			}
 			

@@ -1,10 +1,6 @@
 #include "Utils.h"
 
-
-namespace Utils
-{
-
-	Model* LoadOBJModel(GLuint _shaderProgram, const std::string& filePath, const char* texturefilePath) {
+	Model  LoadOBJModel(int programID, const std::string& filePath, const char* texturefilePath) {
 
 		//Verifico archivo y si no puedo abrirlo cierro aplicativo
 		std::ifstream file(filePath);
@@ -114,7 +110,7 @@ namespace Utils
 			}
 		}
 
-		return new Model(texturefilePath, _shaderProgram, vertexs, textureCoordinates, vertexNormal);
+		return Model(programID,texturefilePath, vertexs, textureCoordinates, vertexNormal);
 	}
 
 	//Funcion que genera una smatriz de traslación
@@ -289,5 +285,5 @@ namespace Utils
 		static double startTime = glfwGetTime();
 		return static_cast<float>(glfwGetTime() - startTime);
 	}
-}
 
+	

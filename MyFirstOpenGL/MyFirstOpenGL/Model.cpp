@@ -2,11 +2,12 @@
 #include "Utils.h"
 #define WINDOW_WIDTH 100
 #define WINDOW_HEIGHT 880
-using namespace Utils;
 
-Model::Model(const char* filePath,GLuint shaderProg, const std::vector<float>& vertexs, const std::vector<float>& uvs, const std::vector<float>& normals)
+
+using namespace Utils;
+Model::Model( int programID, const char* filePath,const std::vector<float>& vertexs, const std::vector<float>& uvs, const std::vector<float>& normals)
 {
-	_programID = shaderProg;
+	_programID = programID;
 	_texture = new Texture(filePath,uvs);
 	//Almaceno la cantidad de vertices que habra
 	this->numVertexs = vertexs.size() / 3;
@@ -42,7 +43,8 @@ Model::Model(const char* filePath,GLuint shaderProg, const std::vector<float>& v
 
 void Model::Render()
 {
-	
+	UseProgram();
+
 	//Vinculo su VAO para ser usado
 	glBindVertexArray(this->VAO);
 
@@ -58,11 +60,11 @@ void Model::Render()
 void Model::UseProgram()
 {
 
-	glUseProgram(_programID);
+	glUseProgram(myProgram->compiledPrograms[_programID]);
 
-	glm::mat4 translationMatrix = GenerateTranslationMatrix(position + glm::vec3(0.f, 0.f, 0.f));
-	glm::mat4 rotationMatrix = GenerateRotationMatrix(glm::vec3(1.f, 1.f, 1.f), rotation.x);
-	glm::mat4 scaleMatrix = GenerateScaleMatrix(scale);
+	glm::mat4 translationMatrix = Utils::GenerateTranslationMatrix(position + glm::vec3(0.f, 0.f, 0.f));
+	glm::mat4 rotationMatrix =Utils::->GenerateRotationMatrix(glm::vec3(1.f, 1.f, 1.f), rotation.x);
+	glm::mat4 scaleMatrix =Utils::->GenerateScaleMatrix(scale);
 	glm::mat4 view = glm::lookAt(myCamera->position, myCamera->position + glm::vec3(0.f, 0.f, -1.f), myCamera->localVectorUp);
 	glm::mat4 projection = glm::perspective(myCamera->fFov, (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 100.0f);
 
@@ -75,5 +77,5 @@ void Model::UseProgram()
 	glUniformMatrix4fv(glGetUniformLocation(_programID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
 	glUseProgram(0);
-	glDeleteProgram(_programID);
+	glDeleteProgram(myProgram->compiledPrograms[_programID]);
 }

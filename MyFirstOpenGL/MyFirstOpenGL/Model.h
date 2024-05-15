@@ -2,30 +2,28 @@
 #define MODEL_H
 #include "GameObject.h"
 #include "Texture.h"
-#include <vector>
-#include "stb_image.h"
-#include <GL/glew.h>
-#include <fstream>
-#include <sstream>
-#include <string>
 #include "Camera.h"
+#include "MyShaderProgram.h"
 
 
 class Model : public GameObject
 {
 public:
-	Model(const char* textureFilePath, GLuint shaderProg, const std::vector<float>& vertexs, const std::vector<float>& uvs, const std::vector<float>& normals);
+	Model(int programID, const char* textureFilePath, const std::vector<float>& vertexs, const std::vector<float>& uvs, const std::vector<float>& normals);
 	virtual void Render();
 	virtual void UseProgram();
 	Camera* myCamera;
+	
 
 
 protected:
 	GLuint VAO, VBO, uvVBO;
+	MyShaderProgram* myProgram;
+	
 	unsigned int numVertexs;
 	Texture * _texture;
+	int _programID;
 	
-	GLuint _programID;
 
 };
 
