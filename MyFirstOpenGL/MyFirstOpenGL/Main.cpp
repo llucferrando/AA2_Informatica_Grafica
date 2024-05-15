@@ -1,29 +1,23 @@
+#include "ProgramManager.h"
+#include "Texture.h"
 
-#include "Utils.h"
-#include "Camera.h"
-#include "InputManager.h"
-#include "Model.h"
-#include "MyShaderProgram.h"
-
-#define WINDOW_WIDTH 1000
-#define WINDOW_HEIGHT 880
+#define WINDOW_WIDTH 640
+#define WINDOW_HEIGHT 480
 
 
-MyShaderProgram * myProgram;
 std::vector<Model> models;
-
-using namespace Utils;
+Texture* _texture;
 void Resize_Window(GLFWwindow* window, int iFrameBufferWidth, int iFrameBufferHeight) {
+
+
 	//Definir nuevo tamaño del viewport
 	glViewport(0, 0, iFrameBufferWidth, iFrameBufferHeight);
-	glUniform2f(glGetUniformLocation(myProgram->compiledPrograms[0], "windowSize"), iFrameBufferWidth, iFrameBufferHeight);
+	glUniform2f(glGetUniformLocation(ProgramManager::getInstance().compiledPrograms[0], "windowSize"), iFrameBufferWidth, iFrameBufferHeight);
 }
 
+
 void main() {
-	
-	InputManager myInputManager;
-	Camera* myCamera = new Camera;
-	
+
 	//Definir semillas del rand según el tiempo
 	srand(static_cast<unsigned int>(time(NULL)));
 
@@ -54,13 +48,16 @@ void main() {
 	//Indicamos lado del culling
 	glCullFace(GL_BACK);
 
-	//Indicamos lado del cullingS
+	//Indicamos lado del culling
 	glEnable(GL_DEPTH_TEST);
+
 
 	//Inicializamos GLEW y controlamos errores
 	if (glewInit() == GLEW_OK) {
 
-		models.push_back(myProgram->LoadOBJModel(myProgram,0,"Assets/Models/troll.obj", "Assets/Texturas/troll.png"));
+
+		//Cargo Modelo
+		models.push_back(Utils::LoadOBJModel(0, "Assets/Models/troll.obj", "Assets/Textures/troll.png"));
 
 		//Definimos color para limpiar el buffer de color
 		glClearColor(1.f, 1.f, 1.f, 1.f);
@@ -82,15 +79,12 @@ void main() {
 				model.Render();
 
 			}
-			
-			
-			myInputManager.InputTransforms(window, myCamera);
-			
+
+			//Cambiamos buffers
 			glFlush();
 			glfwSwapBuffers(window);
 		}
-		
-	
+
 
 	}
 	else {

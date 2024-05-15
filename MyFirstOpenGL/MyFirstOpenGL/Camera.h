@@ -1,3 +1,4 @@
+
 #pragma once
 #include "GameObject.h"
 
@@ -9,7 +10,7 @@ public:
 	float aspectRatio;
 	float fNear;
 	float fFar;
-	
+
 
 };
 

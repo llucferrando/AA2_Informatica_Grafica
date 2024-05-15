@@ -7,15 +7,9 @@
 class Texture
 {
 public:
-	
-	Texture(const char* filePath, const std::vector<float>& uvs);
-	void InitializeTexture();
-private:
-	
-	const char* _filePath;
-	
-	const std::vector<float>& _uvs;
 
-	
+	Texture() = default;
+	void InitializeTexture(const char* filePath);
+
 };
 
